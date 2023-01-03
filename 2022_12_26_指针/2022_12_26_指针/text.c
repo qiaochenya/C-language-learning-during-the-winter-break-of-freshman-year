@@ -47,7 +47,7 @@
 //{
 //	int a = 0x44332211;
 //	int* pa = &a;
-//	char* pc = &a;
+//	char* pc = (char*)&a;
 //	printf("%p\n", pa);
 //	printf("%p\n", pa+1);
 //	printf("%p\n", pc);
@@ -141,13 +141,13 @@
 
 //指针减去指针
 
-int main()
-{
-	int arr[5] = { 0 };
-	printf("%lld\n", &arr[5] - &arr[0]);
-	//printf("%d", arr[3]);
-	return 0;
-}
+//int main()
+//{
+//	int arr[5] = { 0 };
+//	printf("%lld\n", &arr[5] - &arr[0]);
+//	printf("%d", arr[3]);
+//	return 0;
+//}
 
 //实现自己的strlen
 
@@ -200,13 +200,13 @@ int main()
 
 //指针数组-本质上是数组-用来存放指针
 
-//int main()
-//{
-//	int a = 1, b = 2, c = 3;
-//	int* arr[3] = { &a,&b,&c };
-//	for (int i = 0; i < 3; i++)
-//	{
-//		printf("%d ", *(arr[i]));
-//	}
-//	return 0;
-//}
+int main()
+{
+	int a = 1, b = 2, c = 3;
+	int* arr[3] = { &a,&b,&c };
+	for (int i = 0; i < 3; i++)
+	{
+		printf("%d ", *(arr[i]));
+	}
+	return 0;
+}
