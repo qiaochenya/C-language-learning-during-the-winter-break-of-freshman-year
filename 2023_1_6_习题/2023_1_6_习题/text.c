@@ -360,26 +360,176 @@
 //D说 C最后，我第三
 //E说 我第四，A第一
 
+//int main()
+//{
+//	for (int a = 0; a <= 5; a++)
+//	{
+//		for (int b = 0; b <= 5; b++)
+//		{
+//			for (int c = 0; c <= 5; c++)
+//			{
+//				for (int d = 0; d <= 5; d++)
+//				{
+//					for (int e = 0; e <= 5; e++)
+//					{
+//						if (((b == 2) + (a == 3) == 1) && ((b == 2) + (e == 4) == 1) && ((c == 1) + (d == 2) == 1) && ((c == 5) + (d == 3) == 1) && ((e == 4) + (a == 1) == 1) && (a * b * c * d * e == 120))
+//						{
+//							printf("a=%d,b=%d,c=%d,d=%d,e=%d\n", a, b, c, d, e);
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
+//	return 0;
+//}
+
+//旋转的字符串
+
+////自己写的
+//void move(char arr[], int k, int sz)
+//{
+//	int left = 0;
+//	int right = sz - k;
+//	while (left < k && right < sz)
+//	{
+//		char temp = arr[left];
+//		arr[left] = arr[right];
+//		arr[right] = temp;
+//		left++;
+//		right++;
+//	}
+//}
+////鹏哥暴力求解
+//void moves(char* arr, int k)
+//{
+//	
+//	int len = (int)strlen(arr);
+//	for (int i = 0; i < k; i++)
+//	{
+//		char temp = *arr;
+//		for (int j = 0; j < len - 1; j++)
+//		{
+//			//arr[j] = arr[j + 1];
+//			*(arr + j) = *(arr + j + 1);
+//		}
+//		arr[len - 1] = temp;
+//	}
+//}
+////更优解
+//void reserve(char* left, char* right)
+//{
+//	assert(left);
+//	assert(right);
+//	while (left < right)
+//	{
+//		char temp = *left;
+//		*left = *right;
+//		*right = temp;
+//		left++;
+//		right--;
+//	}
+//}
+//void movess(char* arr, int k)
+//{
+//	assert(arr);
+//	int len = (int)strlen(arr);
+//	reserve(arr, arr + k - 1);
+//	reserve(arr + k, arr + len - 1);
+//	reserve(arr, arr + len - 1);
+//}
+////int main()
+////{
+////	char arr[] = "abcdef";
+////	int sz = (int)strlen(arr);
+////	//move(arr, 3, sz);
+////	movess(arr, 5);
+////	printf("%s\n", arr);
+////	return 0;
+////}
+//
+////判断一个字符串是不是由另一个字符串旋转得来
+//int is_move(char* arr1, char* arr2)
+//{
+//	int len = (int)strlen(arr1);
+//	for (int i = 0; i < len; i++)
+//	{
+//		movess(arr1, 1);
+//		int ret = strcmp(arr1, arr2);
+//		if (!ret)
+//			return 1;
+//	}
+//	return 0;
+//}
+//int main()
+//{
+//	char arr1[] = "abcdef";
+//	char arr2[] = "cdeab";
+//	int ret = is_move(arr1, arr2);
+//	if (ret)
+//		printf("yes");
+//	else
+//		printf("no");
+//	return 0;
+//}
+
+//最方便的解用库函数
+
+//int is_left_move(char* arr1, char* arr2)
+//{
+//	int len1 = (int)strlen(arr1);
+//	int len2 = (int)strlen(arr2);
+//	if (len1 != len2)
+//		return 0;
+//	//首先将arr1自己复制自己
+//	strncat(arr1, arr1, len1);
+//	//然后检查子串是否相等
+//	char* p = strstr(arr1, arr2);
+//	if (p != NULL)
+//		return 1;
+//	else
+//		return 0;
+//}
+//int main()
+//{
+//	char arr1[30] = { "qiaochenya" };
+//	char arr2[] = { "aochenyaq" };
+//	int ret = is_left_move(arr1, arr2);
+//	if (ret)
+//		printf("YES");
+//	else
+//		printf("NO");
+//	return 0;
+//}
+
+//杨辉矩阵
+//1	2 3
+//2 3 4
+//3 4 5
+//右上角是一列中最小的，是一行中最大的
+
+int fine(int arr[3][3], int k, int row, int col)
+{
+	int x = 0, y = col - 1;
+	while (x <= 2 && y >= 0)
+	{
+		if (arr[x][y] < k)
+			x++;
+		if (arr[x][y] > k)
+			y--;
+		if (arr[x][y] == k)
+			return 1;
+	}
+	return 0;
+}
 int main()
 {
-	for (int a = 0; a <= 5; a++)
-	{
-		for (int b = 0; b <= 5; b++)
-		{
-			for (int c = 0; c <= 5; c++)
-			{
-				for (int d = 0; d <= 5; d++)
-				{
-					for (int e = 0; e <= 5; e++)
-					{
-						if (((b == 2) + (a == 3) == 1) && ((b == 2) + (e == 4) == 1) && ((c == 1) + (d == 2) == 1) && ((c == 5) + (d == 3) == 1) && ((e == 4) + (a == 1) == 1) && (a * b * c * d * e == 120))
-						{
-							printf("a=%d,b=%d,c=%d,d=%d,e=%d\n", a, b, c, d, e);
-						}
-					}
-				}
-			}
-		}
-	}
+	int arr[3][3] = { {1,2,3},{2,3,4},{3,4,5} };
+	int k = 5;
+	int ret = fine(arr, k, 3, 3);
+	if (ret)
+		printf("找到了\n");
+	else
+		printf("no");
 	return 0;
 }
