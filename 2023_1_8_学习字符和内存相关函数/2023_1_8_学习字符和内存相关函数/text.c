@@ -48,23 +48,23 @@
 
 //实现strcat函数
 
-//char* my_strcat(char* str1, const char* str2)
-//{
-//	assert(str1 && str2);
-//	char* p = str1;
-//	while (*str1)
-//		str1++;
-//	while (*str1++ = *str2++);	//后置++先使用后++
-//	return p;
-//}
-//int main()
-//{
-//	char arr1[30] = { "hello" };
-//	char* arr2 = " world";
-//	my_strcat(arr1, arr2);
-//	printf("%s\n", arr1);
-//	return 0;
-//}
+char* my_strcat(char* str1, const char* str2)
+{
+	assert(str1 && str2);
+	char* p = str1;
+	while (*str1++);	//它是先解引用，然后即使是0，也会++再跳出去
+		str1--;
+	while (*str1++ = *str2++);	//后置++先使用后++
+	return p;
+}
+int main()
+{
+	char arr1[30] = { "hello" };
+	char* arr2 = " world";
+	my_strcat(arr1, arr2);
+	printf("%s\n", arr1);
+	return 0;
+}
 
 //实现strcmp函数
 
@@ -188,16 +188,16 @@
 //	return 0;
 //}
 
-int main()
-{
-	char arr[] = "Qiao chen";
-	for (int i = 0; arr[i] != '\0'; i++)
-	{
-		if (isupper(arr[i]) == 0)
-		{
-			arr[i] = toupper(arr[i]);	//这个函数返回的是一个字符
-		}
-	}
-	printf("%s\n", arr);
-	return 0;
-}
+//int main()
+//{
+//	char arr[] = "Qiao chen";
+//	for (int i = 0; arr[i] != '\0'; i++)
+//	{
+//		if (isupper(arr[i]) == 0)
+//		{
+//			arr[i] = toupper(arr[i]);	//这个函数返回的是一个字符
+//		}
+//	}
+//	printf("%s\n", arr);
+//	return 0;
+//}
